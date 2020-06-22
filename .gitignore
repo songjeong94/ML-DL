@@ -1,1 +1,10 @@
-/graph
+*.npy
+*.jpg
+*.wav
+*.hdf5
+*.h5
+graph/*
+*.zip
+*.json
+*.tar
+data/*
