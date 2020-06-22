@@ -8,3 +8,4 @@ graph/*
 *.json
 *.tar
 data/*
+*.mp4
