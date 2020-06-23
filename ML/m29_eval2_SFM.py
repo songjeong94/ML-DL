@@ -39,7 +39,7 @@ acc = accuracy_score(y_test, y_pred)
 print("acc : ", acc)
 
 thresholds = np.sort(model.feature_importances_)
-
+import pickle
 print(thresholds)
 
 for thresh in thresholds: #중요하지 않은 컬럼들을 하나씩 지워나간다.
@@ -62,6 +62,8 @@ for thresh in thresholds: #중요하지 않은 컬럼들을 하나씩 지워나�
     acc = accuracy_score(y_test, y_pred)
     #print("R2:",r2)
 
+    for i in thresholds:
+        pickle.dump(model, open("./model/sample/xgb_save/cancer.pickle{}.dat".format(selection_x_train.shape[1]), "wb"))
     print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1],
                         acc*100.0))
 

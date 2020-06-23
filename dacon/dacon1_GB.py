@@ -46,8 +46,8 @@ plot_feature_importances_x(model2)
 plt.show()
 
 
-# a = np.arange(10000,20000)
-# y_pred = pd.DataFrame(y_pred,a)
-# y_pred.to_csv('./data/dacon/comp1/sample_submission.csv', index = True, header=['hhb','hbo2','ca','na'],index_label='id')
+a = np.arange(10000,20000)
+y_pred = pd.DataFrame(y_pred,a)
+y_pred.to_csv('./data/dacon/comp1/sample_submission.csv', index = True, header=['hhb','hbo2','ca','na'],index_label='id')
 
 

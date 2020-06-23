@@ -30,7 +30,7 @@ parameters = { 'rf__n_estimators' : [10, 100],
            'rf__min_samples_split' : [8, 16, 20]}
 
 
-model2 = RandomForestRegressor(outputs= 4)
+model2 = RandomForestRegressor(output=4)
 
 pipe = Pipeline([("scaler", MinMaxScaler()),('rf', model2)])
 search = RandomizedSearchCV(pipe, parameters, cv = 5)

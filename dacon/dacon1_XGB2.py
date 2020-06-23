@@ -6,10 +6,14 @@ from sklearn.model_selection import train_test_split, KFold
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import RandomizedSearchCV
-from xgboost import XGBRegressor
+from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
+from xgboost import XGBRegressor, XGBRFRegressor, XGBRFClassifier
 from sklearn.datasets import make_regression
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from sklearn.metrics import accuracy_score, r2_score
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.feature_selection import SelectFromModel
+import warnings 
+
 import pandas as pd
 train = np.load('./data/dacon/comp1/train.npy', allow_pickle='True')
 test = np.load('./data/dacon/comp1/test.npy', allow_pickle='True')
@@ -18,33 +22,37 @@ submission = np.load('./data/dacon/comp1/submission.npy', allow_pickle='True')
 x = train[:, :71]
 y = train[:, 71:]
 
+
 test = test[:, :71]
 
 print(x.shape)
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, shuffle='True', random_state=1)
 
-model2 = DecisionTreeRegressor()
-model2.fit(x_train,y_train)
+print(x_train.shape)
 
-y_pred = model2.predict(test)
-print(model2.feature_importances_)
+# parameters=[
+#     { 'n_estimators' : [300],
+#     'learning_rate' : [1],
+#     'colsample_bytree' : [0.9], # 0.6~0.9사용
+#     'colsample_bylevel': [0.9],
+#     'max_depth' : [50]}
+# ]
+
+model = XGBRFRegressor(n_jobs=-1)
+# model = GridSearchCV(model, parameters, cv =5)
+model = MultiOutputRegressor(model)
+
+warnings.filterwarnings('ignore')
+model.fit(x_train, y_train)
+y_pred = model.predict(x_test)
 print(y_pred)
 print(y_pred.shape)
-
-import matplotlib.pyplot as plt
-import numpy as np
-def plot_feature_importances_x(model):
-    n_features = x.shape[1]
-    plt.barh(np.arange(n_features), model.feature_importances_,
-            align='center') #barh = 가로 막대 그래프./ 중앙정렬
-    plt.yticks(np.arange(n_features))
-    plt.xlabel("Feature Importances")
-    plt.ylabel("Features")
-    plt.ylim(-1, n_features)
-
-plot_feature_importances_x(model2)
-plt.show()
-
+acc = model.score(x_test, y_test)
+warnings.filterwarnings('ignore')
+print(acc)
+# print("최적의 매개 변수 :  ", model.best_params_)
+warnings.filterwarnings('ignore')
+# print("최적의모델은:", model.best_estimator_)
 
 a = np.arange(10000,20000)
 y_pred = pd.DataFrame(y_pred,a)

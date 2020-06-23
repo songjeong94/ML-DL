@@ -7,6 +7,7 @@ from xgboost import XGBRegressor,XGBRFClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import r2_score,accuracy_score
 from sklearn.datasets import load_iris
+import pickle
 
 ## 데이터
 x, y = load_iris(return_X_y = True)
@@ -61,7 +62,8 @@ for thresh in thresholds: #중요하지 않은 컬럼들을 하나씩 지워나�
 
     acc = accuracy_score(y_test, y_pred)
     #print("R2:",r2)
-
+    for i in thresholds:
+        pickle.dump(model, open("./model/sample/xgb_save/iris.pickle{}.dat".format(selection_x_train.shape[1]), "wb"))
     print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1],
                         acc*100.0))
 

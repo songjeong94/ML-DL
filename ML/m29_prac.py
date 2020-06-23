@@ -19,18 +19,15 @@ x_train, x_test, y_train, y_test = train_test_split(
     shuffle = True, random_state = 66)
 
 ## 모델링
-model = XGBRegressor(n_estimators = 300,        # verbose의 갯수, epochs와 동일
-                     learning_rate = 0.1)
-
-model.fit(x_train, y_train,
-          verbose = False, eval_metric = ['logloss', 'rmse'],
-          eval_set = [(x_train, y_train),
-                      (x_test, y_test)])
+# model = XGBRegressor(n_estimators = 300,        # verbose의 갯수, epochs와 동일
+#                      learning_rate = 0.1)
+# model.fit(x_train, y_train,
+#             verbose = False, eval_metric = ['logloss', 'rmse'],
+#             eval_set = [(x_train, y_train),
+#                     (x_test, y_test)])
         #   early_stopping_rounds = 100)
 # eval_metic의 종류 : rmse, mae, logloss, error(error가 0.2면 accuracy는 0.8), auc(정확도, 정밀도; accuracy의 친구다)
-
-results = model.evals_result()
-print("eval's result : ", results)
+model = pickle.load(open("./model/sample/xgb_save/boston.pickle7.dat", "rb"))
 
 y_pred = model.predict(x_test)
 
@@ -41,31 +38,34 @@ print("R2 : ", r2)
 thresholds = np.sort(model.feature_importances_)
 
 print(thresholds)
+results = model.evals_result()
+print("eval's result : ", results)
+print("R2 : ", r2)
 
-for thresh in thresholds: #중요하지 않은 컬럼들을 하나씩 지워나간다.
-    selection = SelectFromModel(model, threshold=thresh, prefit=True)
+# for thresh in thresholds: #중요하지 않은 컬럼들을 하나씩 지워나간다.
+#     selection = SelectFromModel(model, threshold=thresh, prefit=True)
 
-    selection_x_train = selection.transform(x_train)
-    selection_x_test = selection.transform(x_test)
+#     selection_x_train = selection.transform(x_train)
+#     selection_x_test = selection.transform(x_test)
    
 
-    print(selection_x_train.shape)
+#     print(selection_x_train.shape)
     
-    selection_model = XGBRegressor(n_jobs=-1)
+#     selection_model = XGBRegressor(n_jobs=-1)
 
-    selection_model.fit(selection_x_train,y_train, eval_metric = ['error', 'rmse'],
-          eval_set = [(selection_x_train, y_train),
-                      (selection_x_test, y_test)], early_stopping_rounds=10)
+#     selection_model.fit(selection_x_train,y_train, eval_metric = ['error', 'rmse'],
+#           eval_set = [(selection_x_train, y_train),
+#                       (selection_x_test, y_test)], early_stopping_rounds=10)
 
-    y_pred = selection_model.predict(selection_x_test)
+#     y_pred = selection_model.predict(selection_x_test)
 
-    r2 = r2_score(y_test, y_pred)
-    #print("R2:",r2)
-    for thresh in thresholds:
-        pickle.dump(selection_model, open("./model/sample/xgb_save/boston.pickle{}.dat".format(selection_x_train.shape[1]), "wb"))
+#     r2 = r2_score(y_test, y_pred)
+#     #print("R2:",r2)
+#     for i in thresholds:
+#         pickle.dump(model, open("./model/sample/xgb_save/boston.pickle{}.dat".format(selection_x_train.shape[1]), "wb"))
 
-    print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1],
-                        r2*100.0))
+#     print("Thresh=%.3f, n=%d, acc: %.2f%%" %(thresh, selection_x_train.shape[1],
+#                         r2*100.0))
 
 
 ## 그래프, 시각화
