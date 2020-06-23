@@ -7,6 +7,7 @@ from xgboost import XGBRegressor, XGBRFRegressor
 from sklearn.metrics import accuracy_score, r2_score, mean_absolute_error
 from sklearn.feature_selection import SelectFromModel
 from sklearn.preprocessing import RobustScaler, StandardScaler, MinMaxScaler
+from lightgbm import LGBMRegressor
 import warnings 
 import pandas as pd
 
@@ -50,14 +51,15 @@ x2_test = scaler.transform(x2_test)
 #     'colsample_bylevel': [0.6, 0.8, 0.9],
 #     'max_depth' : [6,7,8]}
 # ]
-
+gpu_id=0, tree_method='gpu_hist'
 # model1 = XGBRFRegressor(n_estimators= 300,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=50,subsample=0.8, n_jobs=-1)
-model2 = XGBRFRegressor(n_estimators= 400,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=50)
+# model2 = XGBRFRegressor(n_estimators= 400,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=50)
+model2 =LGBMRegressor()
 # model3 = XGBRFRegressor(n_estimators= 350,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=40,subsample=1,n_jobs=-1)
 # model4 = XGBRFRegressor(n_estimators= 100,learning_rate=1,colsample_bytree=1,colsample_bylevel=0.7,max_depth=30,n_jobs=-1)
 
 # model = GridSearchCV(model, parameters, cv =5)
-# model = MultiOutputRegressor(model)
+# model = MultiOutputRegressor(model2)
 
 warnings.filterwarnings('ignore')
 # model1.fit(x_train, y1_train)

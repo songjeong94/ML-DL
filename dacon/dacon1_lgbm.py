@@ -6,7 +6,7 @@ from xgboost import XGBRegressor, XGBRFRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.feature_selection import SelectFromModel
-import lightgbm as lgb
+from lightgbm import LGBMRegressor
 import warnings 
 
 import pandas as pd
@@ -28,17 +28,14 @@ scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
 
-# parameters=[
-#     { 'n_estimators' : [6,10,30,100,300],
-#     'learning_rate' : [0.01,0.5 , 1],
-#     'colsample_bytree' : [0.6, 0.8, 0.9], # 0.6~0.9사용
-#     'colsample_bylevel': [0.6, 0.8, 0.9],
-#     'max_depth' : [6,7,8]}
-# ]
 
-model = lgb(boosting_type = dart ,n_estimators=300,min_child_samples=100, learning_rate=0.01,
-                    max_depth= 20,num_iterations=2000,
-                    feature_fraction=1,num_leaves=1000,min_data_in_leaf=2)
+model = LGBMRegressor(boosting_type='gbdt',n_estimators=300,
+learning_rate = 0.01,
+max_depth=20,
+num_iterations=2000,
+feature_fraction=0.8,
+colsample_bytree=0.8,
+num_leaves=1000, n_jobs=-1)
 # model = GridSearchCV(model, parameters, cv =5)
 model = MultiOutputRegressor(model)
 

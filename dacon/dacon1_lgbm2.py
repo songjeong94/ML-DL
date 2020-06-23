@@ -28,17 +28,31 @@ scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
 
-# parameters=[
-#     { 'n_estimators' : [6,10,30,100,300],
-#     'learning_rate' : [0.01,0.5 , 1],
-#     'colsample_bytree' : [0.6, 0.8, 0.9], # 0.6~0.9사용
-#     'colsample_bylevel': [0.6, 0.8, 0.9],
-#     'max_depth' : [6,7,8]}
-# ]
 
-model = lgb(boosting_type = dart ,n_estimators=300,min_child_samples=100, learning_rate=0.01,
-                    max_depth= 20,num_iterations=2000,
-                    feature_fraction=1,num_leaves=1000,min_data_in_leaf=2)
+l_train = lgb.Dataset(x_train, label = y_train)
+
+params = []
+params['objective'] = regressor
+params['boosting_type'] = dart
+params['n_estimators'] = 300
+params['learning_rate'] = 0.01
+params['max_depth'] = 20
+params['num_iterations'] = 2000
+params['feature_fraction'] = 0.8
+params['num_leaves'] = 1000
+
+
+# parameters={'object': 'regressor',
+# 'boosting_type':'dart',
+# 'n_estimators':300,
+# 'learning_rate':0.01,
+# 'max_depth':20,
+# 'num_iterations':2000,
+# 'feature_fraction':0.8,
+# 'num_leaves':1000,}
+
+model = lgb.train(params,l_train,100)
+# model = lgb(parameters)
 # model = GridSearchCV(model, parameters, cv =5)
 model = MultiOutputRegressor(model)
 

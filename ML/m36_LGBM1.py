@@ -30,6 +30,7 @@ model.fit(x_train, y_train)
 y_pred = model.predict(x_test)
 
 r2 = r2_score(y_test, y_pred)
+print(r2)
 # print("r2 Score : %.2f%%" %(r2 * 100))
 
 
