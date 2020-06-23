@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 
-train = pd.read_csv('./data/dacon/comp1/train.csv', header = 0, index_col=0)
+train = pd.read_csv('./data/dacon/comp1/train.csv', header = 0, index_col=0, sep = ',')
 test = pd.read_csv('./data/dacon/comp1/test.csv', header = 0, index_col=0)
 submission = pd.read_csv('./data/dacon/comp1/sample_submission.csv', header = 0, index_col=0)
 
@@ -19,6 +19,8 @@ print(test.isnull().sum())
 train = train.fillna(method='bfill')
 test = test.fillna(method='bfill')
 
+train = train.sort_values(['rho'], ascending=['True'])
+print(train)
 train = train.values
 test = test.values
 submission = submission.values
