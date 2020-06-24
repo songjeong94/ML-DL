@@ -44,11 +44,11 @@ from keras.models import Sequential, Model
 from keras.layers import Dense, Input,Flatten,Dropout
 
 input1 = Input(shape=(35,1))
-dense1_1 = Dense(100, activation='relu', name = 'hi_1')(input1)
+dense1_1 = Dense(40, activation='relu', name = 'hi_1')(input1)
 drop1 = Dropout(0.4)(dense1_1)
-dense1_2 = Dense(200, activation='relu', name = 'hi_2')(drop1)
+dense1_2 = Dense(80, activation='relu', name = 'hi_2')(drop1)
 drop2 = Dropout(0.4)(dense1_2) 
-dense1_3 = Dense(100, activation='relu', name = 'hi_3')(drop2)
+dense1_3 = Dense(20, activation='relu', name = 'hi_3')(drop2)
 
 
 input2 = Input(shape=(35,1)) 

@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
+from sklearn.ensemble import IsolationForest
+
 
 train = pd.read_csv('./data/dacon/comp1/train.csv', header = 0, index_col=0, sep = ',')
 test = pd.read_csv('./data/dacon/comp1/test.csv', header = 0, index_col=0)
@@ -21,6 +23,16 @@ test = test.fillna(method='bfill')
 
 train = train.sort_values(['rho'], ascending=['True'])
 print(train)
+
+#이상치 제거
+clf = IsolationForest(max_samples=1000, random_state=1)
+clf.fit(train)
+pred_outliers = clf.predict(train)
+out = pd.DataFrame(pred_outliers)
+out = out.rename(columns={0:"out"})
+new_train = pd.concat([train, out],1)
+
+
 train = train.values
 test = test.values
 submission = submission.values

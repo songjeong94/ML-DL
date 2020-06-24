@@ -51,10 +51,9 @@ x2_test = scaler.transform(x2_test)
 #     'colsample_bylevel': [0.6, 0.8, 0.9],
 #     'max_depth' : [6,7,8]}
 # ]
-gpu_id=0, tree_method='gpu_hist'
+# gpu_id=0, tree_method='gpu_hist'
 # model1 = XGBRFRegressor(n_estimators= 300,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=50,subsample=0.8, n_jobs=-1)
-# model2 = XGBRFRegressor(n_estimators= 400,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=50)
-model2 =LGBMRegressor()
+model2 = XGBRFRegressor(n_estimators= 400,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=50)
 # model3 = XGBRFRegressor(n_estimators= 350,learning_rate=1,colsample_bytree=1,colsample_bylevel=1,max_depth=40,subsample=1,n_jobs=-1)
 # model4 = XGBRFRegressor(n_estimators= 100,learning_rate=1,colsample_bytree=1,colsample_bylevel=0.7,max_depth=30,n_jobs=-1)
 
