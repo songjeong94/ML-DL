@@ -40,7 +40,7 @@ print(no_of_recordings)
 #plot
 plt.figure(figsize=(30,5))
 index = np.arange(len(labels))
-plt.bar(index, no_of_recordings)
+plt.bar(index, no_of_recordings) 
 plt.xlabel('Commands', fontsize=12)
 plt.ylabel('No of recordings', fontsize=12)
 plt.xticks(index, labels, fontsize=15, rotation=60)
