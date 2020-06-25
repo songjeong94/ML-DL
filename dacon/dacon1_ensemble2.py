@@ -44,26 +44,26 @@ from keras.models import Sequential, Model
 from keras.layers import Dense, Input,Flatten,Dropout
 
 input1 = Input(shape=(35,1))
-dense1_1 = Dense(40, activation='relu', name = 'hi_1')(input1)
+dense1_1 = Dense(100, activation='relu', name = 'hi_1')(input1)
 drop1 = Dropout(0.4)(dense1_1)
-dense1_2 = Dense(80, activation='relu', name = 'hi_2')(drop1)
+dense1_2 = Dense(1000, activation='relu', name = 'hi_2')(drop1)
 drop2 = Dropout(0.4)(dense1_2) 
-dense1_3 = Dense(20, activation='relu', name = 'hi_3')(drop2)
+dense1_3 = Dense(1000, activation='relu', name = 'hi_3')(drop2)
 
 
 input2 = Input(shape=(35,1)) 
-dense2_1 = Dense(40, activation='relu', name = 'hello_1')(input2) 
+dense2_1 = Dense(100, activation='relu', name = 'hello_1')(input2) 
 drop3 = Dropout(0.4)(dense2_1) 
-dense2_2 = Dense(80, activation='relu', name = 'hello_2')(drop3)
+dense2_2 = Dense(1000, activation='relu', name = 'hello_2')(drop3)
 drop4 = Dropout(0.4)(dense2_2) 
-dense2_3 = Dense(20, activation='relu', name = 'hello_3')(drop4)
+dense2_3 = Dense(1000, activation='relu', name = 'hello_3')(drop4)
 
 
 from keras.layers.merge import concatenate
 merge1 = concatenate([dense1_3, dense2_3])
 
-middle1 = Dense(50)(merge1)
-drop5 = Dropout(0.2)(middle1)
+middle1 = Dense(1000)(merge1)
+drop5 = Dropout(0.6)(middle1)
 middle1 = Dense(50)(drop5)
 ######## output 모델 구성########## 
 
