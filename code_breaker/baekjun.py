@@ -1,15 +1,14 @@
-a = int(input())
+n = int(input())
+c = n
+count = 0
+
 while True:
-    if a > 10:
-        while d == a:
-            a = str(a)
-            b = a[0] + a[1]
-            b = int(a)
-            b = a[0] + a[1]
-            
-
-    if a < 10:
-        a = str(a)
-        b = '0' + a
-        b = int(b)
-
+    a = c//10
+    b = c%10
+    c = b*10+(a+b)%10
+    count += 1
+    print(count)
+    print(c)
+    if c == n:
+        break
+print(count)
