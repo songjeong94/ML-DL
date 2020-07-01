@@ -24,7 +24,6 @@ data = data.drop(['REG_YYMM'], axis=1)
 # 데이터 정제
 df = data.copy()
 df = df.drop(['CARD_CCG_NM', 'HOM_CCG_NM'], axis=1)
-
 columns = ['CARD_SIDO_NM', 'STD_CLSS_NM', 'HOM_SIDO_NM', 'AGE', 'SEX_CTGO_CD', 'FLC', 'year', 'month']
 df = df.groupby(columns).sum().reset_index(drop=False)
 

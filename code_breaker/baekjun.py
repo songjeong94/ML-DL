@@ -1,14 +1,12 @@
-n = int(input())
-c = n
-count = 0
+num = int(input())
+num = range(num)
+a = []
 
-while True:
-    a = c//10
-    b = c%10
-    c = b*10+(a+b)%10
-    count += 1
-    print(count)
-    print(c)
-    if c == n:
-        break
-print(count)
+for i in num:
+    ch = str(input())
+    a.append(ch)
+print(a)
+for i in a:
+    for i in a[i]:
+        i += 1
+        'o'*i = 1*i     
