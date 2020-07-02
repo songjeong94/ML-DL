@@ -13,7 +13,7 @@ for i in num1:
         i +=1
         num2 -= 2 
     if i >= num:
-        i += 1
+        i += 11
         cro += 2
         res-=1
         print(" "*res + "*"*cro)

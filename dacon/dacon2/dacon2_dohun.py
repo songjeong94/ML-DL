@@ -192,12 +192,12 @@ def train(model,X,Y):
         os.mkdir(MODEL_SAVE_FOLDER_PATH)
 
     model_path = MODEL_SAVE_FOLDER_PATH + '{epoch:02d}-{val_loss:.4f}.hdf5'
-    best_save = ModelCheckpoint('best2_m.hdf5', save_best_only=True, monitor='val_loss', mode='min')
+    best_save = ModelCheckpoint('best2_1_m.hdf5', save_best_only=True, monitor='val_loss', mode='min')
 
 
     history = model.fit(X, Y,
                   epochs=125,
-                  batch_size=64,
+                  batch_size=150,
                   shuffle=True,
                   validation_split=0.2,
                   verbose = 2,
@@ -264,9 +264,9 @@ def plot_error(type_id,pred,true):
 def load_best_model(train_target):
     
     if train_target == 0:
-        model = load_model('best2_m.hdf5' , custom_objects={'my_loss_E1': my_loss, })
+        model = load_model('best2_1_m.hdf5' , custom_objects={'my_loss_E1': my_loss, })
     else:
-        model = load_model('best2_m.hdf5' , custom_objects={'my_loss_E2': my_loss, })
+        model = load_model('best2_1_m.hdf5' , custom_objects={'my_loss_E2': my_loss, })
 
     score = model.evaluate(X_data, Y_data, verbose=0)
     print('loss:', score)
@@ -313,4 +313,4 @@ for train_target in range(3):
     elif train_target == 2: # v 학습
         submit.iloc[:,4] = pred_data_test[:,3]
 
-submit.to_csv('./comp2_2_submit.csv', index = False)
+submit.to_csv('./comp2_4_submit.csv', index = False)
