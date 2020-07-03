@@ -2,12 +2,14 @@ from sklearn.datasets import load_boston
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.callbacks import History, EarlyStopping, ModelCheckpoint
+import mish
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 boston = load_boston()
 x = boston.data
 y = boston.target
+
 
 print(x.shape)
 print(y.shape)
@@ -29,7 +31,7 @@ model.add(Dense(100, activation='relu'))
 model.add(Dropout(0.2))
 model.add(Dense(100, activation='relu'))
 model.add(Dropout(0.2))
-model.add(Dense(1, activation='relu'))
+model.add(Dense(1, activation='mish'))
 
 model.summary()
 

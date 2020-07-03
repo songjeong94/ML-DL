@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 
-
 iris = load_iris()
 
 x = iris.data
