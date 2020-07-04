@@ -1,15 +1,9 @@
-day = int(input())
-count = 0
-number = []
-aaa = map(int,input().split())
-number.append(aaa)
-print(number)
-print(list(number))
+temp = int(input())
 
-for i in number:
-    print(i)
-    if i == day:
-        count += 1
-print(count)
+temp2 = int(input())
+
+d_time = int(input())
+i_time = int(input())
+time = int(input())
 
 
