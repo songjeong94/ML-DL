@@ -41,5 +41,3 @@ print(x_input)
 
 yhat = model.predict(x_input)
 print(yhat)
-'''
-3
