@@ -43,23 +43,30 @@ cell = tf.keras.layers.LSTMCell(output)
 hypothesis, _states = tf.nn.dynamic_rnn(cell, X, dtype=tf.float32)
 print(hypothesis.shape) #(?, 6, 4)
 
+w = tf.Variable(tf.random_normal([4, 1]), name = 'weights')
+b = tf.Variable(tf.random_normal([1]), name = 'bias') 
+hypothesis = tf.matmul(X, w) + b     
+
 #3.컴파일
-weights = tf.ones([batch_size, sequence_length])
+# weights = tf.ones([batch_size, sequence_length])
 cost =  tf.reduce_mean(tf.square( hypothesis - Y))
 
-train = tf.compat.v1.train.AdamOptimizer(learning_rate=0.1).minimize(cost)
-
-prediction = np.array([7,8,9,10])
-prediction = tf.compat.v1.placeholder(tf.float32, (None, 4, 1))
+train = tf.compat.v1.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
 
 #3-2. 훈련
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(401):
+    for i in range(1500):
         loss, _ = sess.run([cost, train], feed_dict={X:x_data, Y:y_data}) #볼필요가 없으면 _만 사용한다.
         print(i,"loss :",loss)
     y_pred =sess.run(hypothesis, feed_dict={X:x_data})
-    r2 = r2_score(y_data, y_pred)
-    print("R2 :", r2)
+    print(y_pred)
 
+#1499 loss : 0.016089702
+# [[[ 4.7842455]
+#   [ 5.8548737]
+#   [ 6.9255013]
+#   [ 7.9961295]
+#   [ 9.066758 ]
+#   [10.137385 ]]]
     
