@@ -6,7 +6,7 @@
 # 얘가 이미지넷에서 준우승을 했기 때문에 그와 유사한 데이터셋등이 나오면 활용 가능하다.
 #momentum = 0.0,  # 0보다 크거나 같은 float, SGD를 적절한 방향으로 가속화하며, 진동을 줄여줌
 
-from keras.applications import VGG16, VGG19, ResNet101
+from keras.applications import VGG16, VGG19, ResNet101, ResNet152V2
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, MaxPool2D, Flatten, BatchNormalization, Activation, Dropout
 from keras.optimizers import Adam, SGD

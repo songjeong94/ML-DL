@@ -1,12 +1,11 @@
-num = int(input())
-num = range(num)
-a = []
+M, F, K = map(int,input().split())
 
-for i in num:
-    ch = str(input())
-    a.append(ch)
-print(a)
-for i in a:
-    for i in a[i]:
-        i += 1
-        'o'*i = 1*i     
+M = M - K
+
+if M/2 > F:
+    print(int(F))
+elif M/2 < F:
+    print(int(M/2))
+elif M/2 == F:
+    print(int(M/2))
+
