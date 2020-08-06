@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-img = cv2.imread('./image_study/messi_1.jpg',1)
+img = cv2.imread('33messi_1.jpg',1)
 # cv2.imread_color: 1
 # cv2.imread_grayscale : 0
 # cv2.imread_unchanged : -1
