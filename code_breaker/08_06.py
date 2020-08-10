@@ -1,21 +1,20 @@
+count = int(input())
+count = range(count)
+stack = 0
 
 
-    
-A, B, C = map(int, input().split())
+for i in count:
+    classes = list(map(int,input().split()))
+    score = classes[1:]
+    student = classes[0]
+    avg = sum(score)/student[0]
+    percent = float(100/student[0])
+    for i in score:
+        if i > avg:
+            stack+=1
+    ans = float(percent * stack)
+    ans = round(ans, 3)
+    stack = 0
+    ans = "%.3f" %ans
+    print('{}%'.format(ans))
 
-count = 0
-mul = 0
-
-while 1:
-    count += 1
-    mul += A
-    if count > 0 and count %7 == 0:
-        mul = mul + B 
-    if mul >= C:
-        print(count)
-        break
-
-
-
-    
-    
