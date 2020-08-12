@@ -7,7 +7,7 @@ print(keras.__version__)    # 2.3.1
 print(cv2.__version__)      # 4.2.0
 
 # 요구버전 
-# 1.9.0
+# 1.9.01
 # 2.2.0
 # 3.4.4
 
@@ -77,6 +77,7 @@ model.load_weights('./Darkhorseproject/matrix/vgg_face_weights.h5')
 def preprocess_image(image_path):
     img = load_img(image_path, target_size=(224, 224))
     img = img_to_array(img) # numpy 배열로 변환 
+    print("img_to_array", img)
     img = np.expand_dims(img, axis=0) # 
     img = preprocess_input(img) # -1 ~ 1 까지 정규화
     return img
@@ -87,7 +88,7 @@ def findCosineSimilarity(source_representation, test_representation):
     b = np.sum(np.multiply(source_representation, source_representation))
     c = np.sum(np.multiply(test_representation, test_representation))
     return 1 - (a / (np.sqrt(b) * np.sqrt(c)))
-
+ 
 def findEuclideanDistance(source_representation, test_representation):
     euclidean_distance = source_representation - test_representation
     euclidean_distance = np.sum(np.multiply(euclidean_distance, euclidean_distance))
